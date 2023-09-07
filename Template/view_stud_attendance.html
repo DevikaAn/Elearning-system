@@ -1,0 +1,88 @@
+{% load static %}
+<html lang="en">
+  <head>
+  	<title>View Attendance</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="{% static 'tabble/css/style.css' %}">
+
+	</head>
+	<body>
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Attendance</h2>
+				</div>
+			<div style="color:blue;" align="center">
+				{% if messages %}
+					{% for msg in messages %}
+							{{ msg }}
+					{% endfor %}
+				{% endif %}
+			</div>
+			</div>
+
+			{% if at %}
+
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Other HTML code -->
+
+<div class="table-wrap">
+    <table class="table table-bordered table-dark table-hover">
+        <thead>
+            <tr>
+                <th>Teacher name</th>
+				<th>Category</th>
+				<th>Course</th>
+                <th>Date</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in at %}
+            <tr>
+                <td>{{ i.atten_tea.user.first_name}} {{ i.atten_tea.user.last_name}}</td>
+				 <td>{{ i.atten_enroll.enrol_cou.cou_cat.Category_title }}</td>
+				<td>{{ i.atten_enroll.enrol_cou.Course_title }}</td>
+                <td>{{ i.Date_tim }}</td>
+                <td>{{ i.Attendance_done_location }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Other HTML code -->
+
+				</div>
+			</div>
+
+			{% else %}
+
+			<h1 align="center" style="color:blue">No attendance available</h1>
+
+			{% endif %}
+
+		</div>
+		<br><br>
+		<div align="center">
+			<button type="submit" onclick="location.href='{% url 'student_home' %}'" name='mybtn2'>Back</button>
+		</div>
+	</section>
+
+	<script src="{% static 'tabble/js/jquery.min.js' %}"></script>
+  <script src="{% static 'tabble/js/popper.js' %}"></script>
+  <script src="{% static 'tabble/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'tabble/js/main.js' %}"></script>
+
+	</body>
+</html>
+

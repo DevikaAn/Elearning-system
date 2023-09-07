@@ -1,0 +1,50 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Translate language</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'trt.css' %}">
+
+</head>
+
+<body class= "pic" background="{% static 'trt.jpg' %}">
+<center>
+<form method="post" action="{% url 'lang' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container">
+    <h1>Language translation</h1>
+    <p>Please fill in this form to create an account.</p>
+    <div style="color:blue;" align="center">
+        {% if messages %}
+            {% for msg in messages %}
+                    {{ msg }}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <hr>
+    <input type="text" placeholder="Enter query" name="quer" required><br>
+
+    <select name="ch">
+        <option value="Nil" selected>Select language</option>
+        {% for i in ch %}
+            <option value="{{i}}">{{i}}</option>
+        {% endfor %}
+    </select><br><br>
+    {% if trk %}
+        <h2 style="color:black">{{trk}}</h2>
+    {% endif %}
+
+    <button type="submit" >Submit</button>&nbsp&nbsp&nbsp&nbsp&nbsp
+    <button type="reset" >Cancel</button>
+  </div>
+
+
+</form>
+ <div>
+     <button type="submit" onclick="location.href='{% url 'home' %}'">Back</button>
+ </div>
+</center>
+
+</body>
+
+</html>

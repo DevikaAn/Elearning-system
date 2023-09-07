@@ -1,0 +1,58 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance page</title>
+    <style>
+        .registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 5px 5px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  opacity: 0.9;
+}
+.pic{
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 100%;
+    }
+    </style>
+</head>
+<body class= "pic" background="{% static 'trt.jpg' %}">
+<div align="center">
+<div align="center" style="color:blue;">
+        {% if messages %}
+            {% for msg in messages %}
+                    {{ msg }}
+            {% endfor %}
+        {% endif %}
+</div>
+<h2>For New Registrations</h2>
+<form method="post" action="{% url 'TakeImages' %}">
+{% csrf_token %}
+    <label>Name</label><br><br>
+    <input type="text" value="{{sbb.enrol_reg.user.first_name}}" name="name"><br><br>
+    <label>Email</label><br><br>
+    <input type="email" name="em" value="{{sbb.enrol_reg.user.email}}"><br><br>
+    <input type="submit" class="registerbtn" value="Take images"><br><br>
+</form>
+</div>
+
+
+<div align="center">
+<h2>For Already Registered</h2>
+    <form method="post" action="{% url 'TrackImages' %}">
+    {% csrf_token %}
+    <input type="submit" class="registerbtn" name='mybtn2' value="Take attendance"><br><br>
+    </form>
+</div>
+<div align="center">
+   <button type="submit" class="registerbtn" onclick="location.href='{% url 'student_home' %}'" name='mybtn2'>Back</button>
+</div>
+</body>
+</html>

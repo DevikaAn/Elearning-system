@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+		table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+            td button{
+            width: 100%;
+            background-color: #138bec;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+            button{
+            width: 30%;
+            background-color: #138bec;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover{
+            color: #06BBCC;
+            background-color: #fff;
+            cursor: pointer;
+        }
+/* general styling */
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+	</style>
+</head>
+<body>
+    <table>
+  <caption>Booked Courses</caption>
+  <thead>
+	<tr>
+		<th>
+			Student_name
+		</th>
+		<th>
+			Student_email
+		</th>
+		<th>
+			Subject_name
+		</th>
+		<th>
+			Course_name
+		</th>
+		<th>
+			Attendance
+		</th>
+		<th>
+			Pending_days
+		</th>
+		<th>
+			Enrollment_date
+		</th>
+        <th>
+			Paid?
+		</th>
+        <th>
+			Teacher_response
+		</th>
+	</tr>
+  </thead>
+  <tbody>
+{% for i in buk %}
+  <tr>
+    <td>{{i.Subject_name}}</td>
+    <td>{{i.Course_name}}</td>
+    <td>{{i.Teacher_name}}</td>
+    <td>{{i.Teacher_email}}</td>
+    <td>{{i.Attendance}}</td>
+    <td>{{i.Pending_days}}</td>
+    <td>{{i.Enrollment_date}}</td>
+    <td>{{i.Teacher_response}}</td>
+      {% if i.Is_paid_subscription == 0 %}
+    <td>Free</td>
+      {% endif %}
+      {% if i.Is_paid_subscription == 1 %}
+    <td>Paid</td>
+      {% endif %}
+    <td>{{i.Paid_amount}}</td>
+    <td>
+      <button type="submit" class="bttn" onclick="location.href='{% url 'acc_chapter' i.id i.Course_name i.Subject_name %}'" name='t_h'>Access chapters</button>
+    </td>
+
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    <br><br><br><br>
+
+<center><button type="button" onclick="location.href='{% url 'student_home' %}'">Back</button></center>
+</body>
+</html>
